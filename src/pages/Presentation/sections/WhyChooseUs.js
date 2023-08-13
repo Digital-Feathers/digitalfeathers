@@ -29,8 +29,53 @@ import AcUnitIcon from '@mui/icons-material/AcUnit';
 import MediationIcon from '@mui/icons-material/Mediation';
 import TokenIcon from '@mui/icons-material/Token';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { useState } from "react";
+
+const FeatureBlock = ({ icon:IconComp, text, index }) => {
+  const [isHovered, setIsHovered] = useState(-1);
+
+  const jumpStyles = {
+    position: 'relative',
+    transition: 'transform 0.3s ease-in-out',
+    transform: isHovered === index ? 'translateY(-3px)' : 'translateY(0)',
+  };
+
+  return (
+    <MKBox display="flex" alignItems="center" p={2}
+      onMouseEnter={() => setIsHovered(index)}
+      onMouseLeave={() => setIsHovered(-1)}>
+      <MKBox
+        width="3rem"
+        height="3rem"
+        variant="gradient"
+        bgColor="info"
+        color="white"
+        coloredShadow="info"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        borderRadius="xl"
+        style={{ ...jumpStyles }}
+      >
+        <Icon fontSize={'medium'}><IconComp/></Icon>
+      </MKBox>
+      <MKTypography variant="body2" color="text" pl={2}>
+        {text}
+      </MKTypography>
+    </MKBox>
+  );
+};
 
 function WhyChooseUs() {
+
+  const features = [
+    { icon: Diversity3Icon, text: 'Expert Team: Our skilled professionals bring years of experience and knowledge.' },
+    { icon: EmojiObjectsIcon, text: 'Custom Solutions: We tailor our strategies to align with your unique business goals.' },
+    { icon: AcUnitIcon, text: 'Results-Driven: We are committed to delivering measurable results and maximizing your ROI.' },
+    { icon: MediationIcon, text: 'Transparent Communication: Regular updates and detailed reports on campaign progress.' },
+    { icon: TokenIcon, text: 'Customer Satisfaction: Your success is our top priority, we go above and beyond for you!' },
+  ];
+
   return (
     <MKBox component="section" py={{ xs: 3, md: 12 }}>
       <Container>
@@ -80,114 +125,14 @@ function WhyChooseUs() {
             sx={{ ml: { xs: -2, lg: "auto" }, mt: { xs: 6, lg: 0 } }}
           >
             <Stack>
-              <MKBox display="flex" alignItems="center" p={2}>
-                <MKBox
-                  width="3rem"
-                  height="3rem"
-                  variant="gradient"
-                  bgColor="info"
-                  color="white"
-                  coloredShadow="info"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  borderRadius="xl"
-                >
-                  <Icon fontSize="medium"><Diversity3Icon/></Icon>
-                </MKBox>
-                <MKTypography variant="body2" color="text" pl={2}>
-                  {/* It becomes harder for us to give others a hand.
-                  <br />
-                  We get our heart broken by people we love. */}
-                  Expert Team: Our skilled professionals bring years
-                  <br />
-                  experience and knowledge.
-                </MKTypography>
-              </MKBox>
-              <MKBox display="flex" alignItems="center" p={2}>
-                <MKBox
-                  width="3rem"
-                  height="3rem"
-                  variant="gradient"
-                  bgColor="info"
-                  color="white"
-                  coloredShadow="info"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  borderRadius="xl"
-                >
-                  <Icon fontSize="medium"><EmojiObjectsIcon/></Icon>
-                </MKBox>
-                <MKTypography variant="body2" color="text" pl={2}>
-                  Custom Solutions: We tailor our strategies to align
-                  <br />
-                  with your unique business goals.
-                </MKTypography>
-              </MKBox>
-              <MKBox display="flex" alignItems="center" p={2}>
-                <MKBox
-                  width="3rem"
-                  height="3rem"
-                  variant="gradient"
-                  bgColor="info"
-                  color="white"
-                  coloredShadow="info"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  borderRadius="xl"
-                >
-                  <Icon fontSize="small"><AcUnitIcon/></Icon>
-                </MKBox>
-                <MKTypography variant="body2" color="text" pl={2}>
-                  Results-Driven: We are committed to delivering
-                  <br />
-                  measurable results and maximizing your ROI.
-                </MKTypography>
-              </MKBox>
-              <MKBox display="flex" alignItems="center" p={2}>
-                <MKBox
-                  width="3rem"
-                  height="3rem"
-                  variant="gradient"
-                  bgColor="info"
-                  color="white"
-                  coloredShadow="info"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  borderRadius="xl"
-                >
-                  <Icon fontSize="medium"><MediationIcon/></Icon>
-                </MKBox>
-                <MKTypography variant="body2" color="text" pl={2}>
-                  Transparent Communication: Regular updates and
-                  <br />
-                  detailed reports on campaign progress.
-                </MKTypography>
-              </MKBox>
-              <MKBox display="flex" alignItems="center" p={2}>
-                <MKBox
-                  width="3rem"
-                  height="3rem"
-                  variant="gradient"
-                  bgColor="info"
-                  color="white"
-                  coloredShadow="info"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  borderRadius="xl"
-                >
-                  <Icon fontSize="small"><TokenIcon/></Icon>
-                </MKBox>
-                <MKTypography variant="body2" color="text" pl={2}>
-                  Customer Satisfaction: Your success is our top priority
-                  <br />
-                  we go above and beyond for you!
-                </MKTypography>
-              </MKBox>
+            {features.map((feature, index) => (
+              <FeatureBlock
+                key={index}
+                index={index}
+                icon={feature.icon}
+                text={feature.text}
+              />
+            ))}
             </Stack>
           </Grid>
         </Grid>

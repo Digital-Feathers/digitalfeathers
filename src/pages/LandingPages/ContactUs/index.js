@@ -32,6 +32,7 @@ import footerRoutes from "../../../footer.routes";
 
 // Image
 import bgImage from "../../../assets/images/illustrations/illustration-reset.jpg";
+import SuccessfulSubmissionModal from "../../../customComponents/modal";
 
 function ContactUs() {
   return (
@@ -130,9 +131,17 @@ function ContactUs() {
                   </Grid>
                 </Grid>
                 <Grid container item justifyContent="center" xs={12} mt={5} mb={2}>
-                  <MKButton type="submit" variant="gradient" color="info">
-                    Send Message
-                  </MKButton>
+                <SuccessfulSubmissionModal 
+                  Trigger={
+                    ({onClick})=>(<MKButton type="submit" variant="gradient" color="info" onClick={(e)=>{
+                      e.preventDefault();
+                      onClick();
+                    }}>
+                          Send Message
+                        </MKButton>)
+                        } 
+                  dialogTitle={`Successful Submission`} 
+                  dialogContent={`Your query has been successfully submitted. We will get back to you soon.`}/>
                 </Grid>
               </MKBox>
             </MKBox>
