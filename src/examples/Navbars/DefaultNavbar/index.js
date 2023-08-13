@@ -29,6 +29,7 @@ import Popper from "@mui/material/Popper";
 import Grow from "@mui/material/Grow";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
+import { IconButton } from "@mui/material";
 import MuiLink from "@mui/material/Link";
 
 // Material Kit 2 React components
@@ -42,6 +43,7 @@ import DefaultNavbarMobile from "./DefaultNavbarMobile";
 
 // Material Kit 2 React base styles
 import breakpoints from "../../../assets/theme/base/breakpoints";
+import Logo from "../../../assets/images/df-logo.jpeg";
 
 function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center }) {
   const [dropdown, setDropdown] = useState("");
@@ -476,6 +478,9 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             py={transparent ? 1.5 : 0.75}
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
           >
+            <IconButton edge="start" color="inherit" aria-label="menu">
+             <img src={Logo} alt="" style={{'max-height': '33px','max-width': '41px'}}/>
+            </IconButton>
             <MKTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
               {brand}
             </MKTypography>
